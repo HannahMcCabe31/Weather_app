@@ -4,7 +4,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: rgb(168, 238, 245);
+    background-image: rgb(145, 201, 244);
+    background-color: rgb(145, 201, 244);
     background-size: cover;
     margin: 0;
 }
