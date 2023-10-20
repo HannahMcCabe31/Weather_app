@@ -25,7 +25,6 @@ async function retrieveWeather() {
   const data = await response.json();
   console.log(data)
   return data;
-  
 }
 
 // Function to update the DOM with the provided weather
