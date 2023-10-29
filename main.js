@@ -1,10 +1,13 @@
+//Wait for DOM content to be fully loaded before executing the code
 document.addEventListener("DOMContentLoaded", (event) => {
   // Add an event listener to the button
 const getWeatherButton = document.getElementById("get-weather-button");
-getWeatherButton.addEventListener("click", async () => {
+  getWeatherButton.addEventListener("click", async () => {
+  //Get the location input from the user
   const locationInput = document.getElementById("location-input");
   const location = locationInput.value;
-  if (location) {
+    if (location) {
+    //if a location is provided, call the function to get and display weather
     await getAndDisplayWeather(location);
   }
 });
@@ -12,11 +15,13 @@ getWeatherButton.addEventListener("click", async () => {
 
 // Update the getAndDisplayWeather function to accept a location parameter
 async function getAndDisplayWeather(location) {
+  //Retriever the current weather for the provided location
   const currentWeather = await retrieveWeather(location);
+  //Display the current weather
   displayWeather(currentWeather);
 }
 
-// Function to asynchronously retrieve the current London from an API
+// Function to asynchronously retrieve the current weather from an API using the location
 async function retrieveWeather(location) {
   // Send a GET request to the geocoding API with the location name
   const response = await fetch(
@@ -42,7 +47,7 @@ async function retrieveWeather(location) {
   const latitude = data.results[0].latitude;
   const longitude = data.results[0].longitude;
 
-  // Now, send a request to the weather API using the retrieved coordinates
+  // Send a request to the weather API using the retrieved coordinates
   const weatherResponse = await fetch(
     `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`,
     {
@@ -53,6 +58,7 @@ async function retrieveWeather(location) {
   );
 
   if (!weatherResponse.ok) {
+    //Log an error and halt app if weather retriveal fails
     console.error(`Status: ${weatherResponse.status}`);
     console.error(`Text: ${await weatherResponse.text()}`);
     return;
@@ -62,14 +68,20 @@ async function retrieveWeather(location) {
   const weatherData = await weatherResponse.json();
   return weatherData;
 }
-// Function to update the DOM with the provided weather
+// Function to update the DOM with the provided weather information
 function displayWeather(currentWeather) {
+
   const weatherElement = document.getElementById("weather");
   const body = document.body;
   if (currentWeather && currentWeather.current_weather) {
+  //Access the weather code and update the displayed information based on the code
     const weatherCode = currentWeather.current_weather.weathercode;
 
     switch (weatherCode) {
+      //Cases for different weather codes to update the display and background image
+      //Each case sets the weather text and a corresponding background image
+      //Default case handles unsupported weather codes and logs an error
+      //IF the weather data is incomplete, an error is logged
       case 1:
       case 2:
       case 3:
