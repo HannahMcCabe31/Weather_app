@@ -90,14 +90,14 @@ function displayWeather(currentWeather) {
         weatherElement.textContent =
           "Drizzle: light, moderate, and dense intensity.";
         body.style.backgroundImage =
-          'url("")';
+          'url("https://images.pexels.com/photos/7002970/pexels-photo-7002970.jpeg?auto=compress&cs=tinysrgb&w=600")';
         break;
       case 56:
       case 57:
         weatherElement.textContent =
           "Freezing drizzle: light and dense intensity.";
         body.style.backgroundImage =
-          'url("")';
+          'url("https://images.pexels.com/photos/301568/pexels-photo-301568.jpeg?auto=compress&cs=tinysrgb&w=600")';
         break;
       case 61:
       case 63:
@@ -112,7 +112,7 @@ function displayWeather(currentWeather) {
         weatherElement.textContent =
           "Freezing rain: light and heavy intensity.";
         body.style.backgroundImage =
-          'url("")';
+          'url("https://images.pexels.com/photos/459451/pexels-photo-459451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")';
         break;
       case 71:
       case 73:
@@ -125,7 +125,7 @@ function displayWeather(currentWeather) {
       case 77:
         weatherElement.textContent = "Light snow fall.";
         body.style.backgroundImage =
-          'url("")';
+          'url("https://images.pexels.com/photos/1694156/pexels-photo-1694156.jpeg?auto=compress&cs=tinysrgb&w=600")';
         break;
       case 80:
       case 81:
@@ -139,18 +139,18 @@ function displayWeather(currentWeather) {
       case 86:
         weatherElement.textContent = "Snow showers slight and heavy.";
         body.style.backgroundImage =
-          'url("")';
+          'url("https://images.pexels.com/photos/1694156/pexels-photo-1694156.jpeg?auto=compress&cs=tinysrgb&w=600")';
         break;
       case 95:
         weatherElement.textContent = "Thunderstorm: Slight or moderate.";
         body.style.backgroundImage =
-          'url("")';
+          'url("https://images.pexels.com/photos/2418664/pexels-photo-2418664.jpeg?auto=compress&cs=tinysrgb&w=600")';
         break;
       case 96:
       case 99:
         weatherElement.textContent = "Thunderstorm with slight and heavy hail.";
         body.style.backgroundImage =
-          'url("")';
+          'url("https://images.pexels.com/photos/8237250/pexels-photo-8237250.jpeg?auto=compress&cs=tinysrgb&w=600")';
         break;
       default:
         console.error("Unsupported weather code:", weatherCode);
