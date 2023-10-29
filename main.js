@@ -1,32 +1,67 @@
-// Asynchronously retrieves the weather and displays it
-async function getAndDisplayWeather() {
-  const currentWeather = await retrieveWeather();
+document.addEventListener("DOMContentLoaded", (event) => {
+  // Add an event listener to the button
+const getWeatherButton = document.getElementById("get-weather-button");
+getWeatherButton.addEventListener("click", async () => {
+  const locationInput = document.getElementById("location-input");
+  const location = locationInput.value;
+  if (location) {
+    await getAndDisplayWeather(location);
+  }
+});
+});
+
+// Update the getAndDisplayWeather function to accept a location parameter
+async function getAndDisplayWeather(location) {
+  const currentWeather = await retrieveWeather(location);
   displayWeather(currentWeather);
 }
+
 // Function to asynchronously retrieve the current London from an API
-async function retrieveWeather() {
-  // Send a GET request to the weather API. Await the response.
-  // Declare a variable to store the HTTP response
+async function retrieveWeather(location) {
+  // Send a GET request to the geocoding API with the location name
   const response = await fetch(
-    "https://api.open-meteo.com/v1/forecast?latitude=51.5085&longitude=-0.1257&current_weather=true",
+    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+      location
+    )}&count=10&language=en&format=json`,
     {
       headers: {
         Accept: "application/json",
       },
     }
   );
-  // Check if the response failed, and if so log an error and halt the app
+  // Check if the response failed, and if so, log an error and halt the app
   if (!response.ok) {
     console.error(`Status: ${response.status}`);
     console.error(`Text: ${await response.text()}`);
     return;
   }
-  // return the parsed JSON from the response (which contains the weather object)
+  // Parse the JSON response to get location information
   const data = await response.json();
-  console.log(data)
-  return data;
-}
 
+  // Extract the latitude and longitude of the first result
+  const latitude = data.results[0].latitude;
+  const longitude = data.results[0].longitude;
+
+  // Now, send a request to the weather API using the retrieved coordinates
+  const weatherResponse = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  );
+
+  if (!weatherResponse.ok) {
+    console.error(`Status: ${weatherResponse.status}`);
+    console.error(`Text: ${await weatherResponse.text()}`);
+    return;
+  }
+
+  // Return the parsed JSON from the weather response (which contains the weather object)
+  const weatherData = await weatherResponse.json();
+  return weatherData;
+}
 // Function to update the DOM with the provided weather
 function displayWeather(currentWeather) {
   const weatherElement = document.getElementById("weather");
@@ -124,6 +159,3 @@ function displayWeather(currentWeather) {
         console.error("Weather data is incomplete.");
     }
   }
-// Waits for the DOM to be fully loaded and then displays an initial weather.
-
-document.addEventListener("DOMContentLoaded", getAndDisplayWeather);
