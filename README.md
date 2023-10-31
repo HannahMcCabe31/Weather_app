@@ -6,12 +6,8 @@ This weather app's main goal is to provide users with up-to-date and accurate we
 
 Current Status:
 
-At the moment, the app provides information about London, offering a brief summary about the current weather conditions and changing the background image to a photo depicting the current weather.
-
-UPDATE:
-
-- I have just finished adding user location input retrieve and display weather data based on the input of the user.
+At the moment, the app provides information about a user-inputted location, offering a brief summary about the current weather conditions and changing the background image to a photo depicting the current weather.
 
 Future plans:
 
-- I'm hoping to add extra details about the weather such as the temperature and wind direction/speed.
+- I'm hoping to add extra details about the weather and refine the user experience.
